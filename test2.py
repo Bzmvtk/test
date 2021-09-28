@@ -44,8 +44,8 @@
 # # функция менеджер, которая распределяет вызов других функций
 
 
-books = {'Financial': 'Theodor Draiser', 'Rich dad, poor dad': 'Robert Kiyosaki', 'Think and get rich': 'Napoleon Hill'}
-users = {}
+books = {'Rich dad, poor dad': 'Robert Kiyosaki', 'Think and get rich': 'Napoleon Hill'}
+users = {'а': {'Financial': 'Theodor Draiser'}}
 # f = books('f')
 # print(f)
 # users['a'] = books['f']
@@ -73,18 +73,19 @@ def choice():
 def manager():
     global books
     global users
-    ch = input('Вы хотите взять книгу или вернуть? Ведите "взять" или "вернуть": ')
-    if ch == 'взять':
+    ch = input('Вы хотите взять книгу или вернуть? Ведите "взять" или "вернуть": ').lower()
+    if ch == 'вз':
         choice()
-    else: 
+    elif ch == 'ве':
         nam = input('Введите имя: ')
         if nam in users:
-            choi = input(f'Вы хотите вернуть: {users.values([0])}? да/нет: ')
-            inp = users.values([0])
+            choi = input(f'Вы хотите вернуть: {users[nam]}? да/нет: ')
+            inp = users[nam]
             if choi == "да":
                 books.update(inp)
-                users.pop(inp)
+                print(books)
+                users.pop(nam)
                 print('Книга успешно возвращена')
-            else:
+            elif choi == 'нет':
                 print('Ну, молодец, что сказать')
 manager()
