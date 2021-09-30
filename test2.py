@@ -43,7 +43,7 @@
 
 # # функция менеджер, которая распределяет вызов других функций
 
-
+book = {'Financial': 'Theodor Draiser', 'Rich dad, poor dad': 'Robert Kiyosaki', 'Think and get rich': 'Napoleon Hill'}
 books = {'Financial': 'Theodor Draiser', 'Rich dad, poor dad': 'Robert Kiyosaki', 'Think and get rich': 'Napoleon Hill'}
 users = {}
 def us():
@@ -75,15 +75,25 @@ def choice():
 def manager():
     global books
     global users
+    global book
     ch = input('Вы хотите взять книгу или вернуть? Ведите "взять", "вернуть", "отмена" или "инфа": ').lower()
     if ch == 'взять':
         choice()
     elif ch == 'вернуть':
         nam = input('Введите имя: ')
+        inp = users[nam]
         if nam in users:
-            choi = input(f'Ваши книги: {users[nam]}\n Какую книгу вы хотите вернуть?: ')
-            inp = users[nam]
-            for k, v in inp.items():
+            values = inp.values()
+            if len(values) == 1:
+                gik = input(f'Вы хотите вернуть {users[nam]}? да/нет:')
+                if gik == 'да':
+                    books.update(inp)
+                    users.pop(nam)
+                    print('Книга успешно возвращена')
+                    us()
+            else:
+                choi = input(f'Ваши книги: {users[nam]}\n Какую книгу вы хотите вернуть?: ')
+                for k, v in inp.items():
                     if k == choi:
                         gog = input('Вы точно хотите вернуть ее? да/нет: ')
                         if gog == 'да':
@@ -97,10 +107,13 @@ def manager():
             print('Такого пользователя не существует')
             us()
     elif ch == 'отмена':
+        books = book
         users.clear()
-        print('На этом пока все, покеда')
+        print('Ну что, покеда')
     elif ch == 'инфа':
         us()
+    elif len(books) == 3:
+        books = book
     else:
         print('Че, самый умный что-ли?')
         manager()
