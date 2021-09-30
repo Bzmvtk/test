@@ -81,21 +81,27 @@ def manager():
     elif ch == 'вернуть':
         nam = input('Введите имя: ')
         if nam in users:
-            choi = input(f'Вы хотите вернуть: {users[nam]}? да/нет: ')
+            choi = input(f'Ваши книги: {users[nam]}\n Какую книгу вы хотите вернуть?: ')
             inp = users[nam]
-            if choi == "да":
-                books.update(inp)
-                users.pop(nam)
-                us()
-                print('Книга успешно возвращена')
-            elif choi == 'нет':
-                print('Ну, молодец, что сказать')
-                us()
+            for k, v in inp.items():
+                    if k == choi:
+                        gog = input('Вы точно хотите вернуть ее? да/нет: ')
+                        if gog == 'да':
+                            books.update({k:v})
+                            inp.pop(choi)
+                            us()
+                        elif gog == 'нет':
+                            print('Ну и че ты тратишь мое время')
+                            us()
         else:
             print('Такого пользователя не существует')
             us()
     elif ch == 'отмена':
+        users.clear()
         print('На этом пока все, покеда')
     elif ch == 'инфа':
         us()
+    else:
+        print('Че, самый умный что-ли?')
+        manager()
 manager()
