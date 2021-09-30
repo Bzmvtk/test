@@ -46,34 +46,36 @@
 
 books = {'Financial': 'Theodor Draiser', 'Rich dad, poor dad': 'Robert Kiyosaki', 'Think and get rich': 'Napoleon Hill'}
 users = {}
-# f = books('f')
-# print(f)
-# users['a'] = books['f']
-# print(users)
 def us():
     global books
     global users
     print(f'Список книг такой: {books}')
     print(f'На данный момент список читателей такой: {users}')
+    manager()
 def reg(name, give):
     global books
     global users
     users[name] = {give: books[give]}
-    # users[name] = books[give]
 def choice():
     global books
     global users
     give = input(f'Какую книгу вы хотите получить? Выберите из \n {books} \n Введите только название:')
     if give in books:
         name = input(f'Введите ваше имя: ')
-        reg(name, give)
-        books.pop(give)
-        print('Ваша заявка успешно оформлена!')
-        us()
+        if name in users:
+            users[name].update({give: books[give]})    
+            books.pop(give)
+            print('Ваша заявка успешно оформлена!')
+            us()
+        else:
+            reg(name, give)
+            books.pop(give)
+            print('Ваша заявка успешно оформлена!')
+            us()
 def manager():
     global books
     global users
-    ch = input('Вы хотите взять книгу или вернуть? Ведите "взять" или "вернуть": ').lower()
+    ch = input('Вы хотите взять книгу или вернуть? Ведите "взять", "вернуть", "отмена" или "инфа": ').lower()
     if ch == 'взять':
         choice()
     elif ch == 'вернуть':
@@ -83,9 +85,17 @@ def manager():
             inp = users[nam]
             if choi == "да":
                 books.update(inp)
-                us()
                 users.pop(nam)
+                us()
                 print('Книга успешно возвращена')
             elif choi == 'нет':
                 print('Ну, молодец, что сказать')
+                us()
+        else:
+            print('Такого пользователя не существует')
+            us()
+    elif ch == 'отмена':
+        print('На этом пока все, покеда')
+    elif ch == 'инфа':
+        us()
 manager()
