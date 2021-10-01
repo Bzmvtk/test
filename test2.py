@@ -95,21 +95,15 @@ def manager():
                 choi = input(f'Ваши книги: {users[nam]}\n Какую книгу вы хотите вернуть?: ')
                 for k, v in inp.items():
                     if k == choi:
-                        gog = input('Вы точно хотите вернуть ее? да/нет: ')
-                        if gog == 'да':
-                            books.update({k:v})
-                            inp.pop(choi)
-                            us()
-                        elif gog == 'нет':
-                            print('Ну и че ты тратишь мое время')
-                            us()
+                        books.update({k:v})
+                inp.pop(choi)
+                us()
         else:
             print('Такого пользователя не существует')
             us()
     elif ch == 'отмена':
         books = book
         users.clear()
-        print('Ну что, покеда')
     elif ch == 'инфа':
         us()
     elif len(books) == 3:
