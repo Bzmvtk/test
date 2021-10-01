@@ -105,8 +105,6 @@ def manager():
         print('Ну что, покеда')
     elif ch == 'инфа':
         us()
-    elif len(books) == 3:
-        books = book
     else:
         print('Че, самый умный что-ли?')
         manager()
