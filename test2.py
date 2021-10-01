@@ -102,8 +102,7 @@ def manager():
             print('Такого пользователя не существует')
             us()
     elif ch == 'отмена':
-        books = book
-        users.clear()
+        print('Ну что, покеда')
     elif ch == 'инфа':
         us()
     elif len(books) == 3:
